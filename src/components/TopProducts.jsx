@@ -10,7 +10,7 @@ const TopProducts = () => {
   ];
 
   return (
-    <div className="bg-card rounded-xl border border-default">
+    <div className="bg-card rounded-xl ">
       <div className="px-6 py-4 border-b border-default">
         <h3 className="text-lg font-semibold text-primary">Top Selling Products</h3>
       </div>

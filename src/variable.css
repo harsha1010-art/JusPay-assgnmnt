@@ -4,50 +4,50 @@
   /* Base Colors - Light Mode */
   --background: #f9fafb;
   --foreground: #111827;
-  --card: #ffffff;
+  --card: #f7f9fb;
   --card-foreground: #111827;
   --popover: #ffffff;
   --popover-foreground: #111827;
-  
+
   /* Primary Colors */
   --primary: #1f2937;
   --primary-foreground: #f9fafb;
-  
+
   /* Secondary Colors */
   --secondary: #f3f4f6;
   --secondary-foreground: #1f2937;
-  
+
   /* Muted Colors */
   --muted: #f3f4f6;
   --muted-foreground: #6b7280;
-  
+
   /* Accent Colors */
   --accent: #f3f4f6;
   --accent-foreground: #1f2937;
-  
+
   /* Status Colors */
   --success: #10b981;
   --success-light: #d1fae5;
   --success-dark: #065f46;
-  
+
   --warning: #f59e0b;
   --warning-light: #fef3c7;
   --warning-dark: #78350f;
-  
+
   --error: #ef4444;
   --error-light: #fee2e2;
   --error-dark: #7f1d1d;
-  
+
   --info: #3b82f6;
   --info-light: #dbeafe;
   --info-dark: #1e3a8a;
-  
+
   /* Border & Input */
   --border: #e5e7eb;
   --border-hover: #d1d5db;
   --input: #e5e7eb;
   --ring: #9ca3af;
-  
+
   /* Sidebar Colors */
   --sidebar-bg: #ffffff;
   --sidebar-foreground: #111827;
@@ -57,33 +57,47 @@
   --sidebar-accent-foreground: #1f2937;
   --sidebar-border: #e5e7eb;
   --sidebar-hover: #f3f4f6;
-  
+  --chaeckbox-bg: #000000;
+
   /* Chart Colors */
   --chart-primary: #3b82f6;
   --chart-secondary: #9ca3af;
   --chart-accent: #60a5fa;
-  --chart-bar-1: #93c5fd;
-  --chart-bar-2: #bfdbfe;
-  --chart-bar-3: #dbeafe;
-  
+  --chart-bar-1: #A8C5DA;
+  --chart-bar-2: rgba(168, 197, 218, 0.55);
+  --chart-bar-3: #B1E3FF;
+
+  /* Donut / pie specific colors (TotalSales) */
+  --donut-1: #111827;
+  --donut-2: #BAEDBD;
+  --donut-3: #95A4FC;
+  --donut-4: #B1E3FF;
+
   /* Dashboard Specific */
   --stat-card-bg: #eff6ff;
   --stat-card-border: #dbeafe;
-  
+  /* Per-stat backgrounds (moved from inline values) */
+  --stat-orders-bg: #F7F9FB;
+  --stat-revenue-bg: #F7F9FB;
+  --stat-growth-bg: #E5ECF6;
+  --stat-default-bg: #E3F5FF;
+  --stat-cg-tc-bg: #000000;
+  --stat-or-tc-bg: #000000;
+
   /* Text Colors */
   --text-primary: #111827;
   --text-secondary: #6b7280;
   --text-tertiary: #9ca3af;
   --text-muted: #d1d5db;
-  
+
   /* Hover States */
   --hover-bg: #f3f4f6;
   --hover-border: #d1d5db;
-  
+
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   --gradient-secondary: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
-  
+
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
@@ -93,54 +107,54 @@
 
 .dark {
   /* Base Colors - Dark Mode */
-  --background: #111827;
+  --background: #1C1C1C;
   --foreground: #f9fafb;
-  --card: #1f2937;
+  --card: #FFFFFF0D;
   --card-foreground: #f9fafb;
   --popover: #374151;
   --popover-foreground: #f9fafb;
-  
+
   /* Primary Colors */
   --primary: #e5e7eb;
   --primary-foreground: #1f2937;
-  
+
   /* Secondary Colors */
   --secondary: #374151;
   --secondary-foreground: #f9fafb;
-  
+
   /* Muted Colors */
   --muted: #374151;
   --muted-foreground: #9ca3af;
-  
+
   /* Accent Colors */
   --accent: #4b5563;
   --accent-foreground: #f9fafb;
-  
+
   /* Status Colors */
   --success: #34d399;
   --success-light: #065f46;
   --success-dark: #d1fae5;
-  
+
   --warning: #fbbf24;
   --warning-light: #78350f;
   --warning-dark: #fef3c7;
-  
+
   --error: #f87171;
   --error-light: #7f1d1d;
   --error-dark: #fee2e2;
-  
+
   --info: #60a5fa;
   --info-light: #1e3a8a;
   --info-dark: #dbeafe;
-  
+
   /* Border & Input */
   --border: #374151;
   --border-hover: #4b5563;
   --input: rgba(255, 255, 255, 0.15);
   --ring: #6b7280;
-  
+
   /* Sidebar Colors */
-  --sidebar-bg: #1f2937;
+  --sidebar-bg: #1C1C1C;
   --sidebar-foreground: #f9fafb;
   --sidebar-primary: #60a5fa;
   --sidebar-primary-foreground: #f9fafb;
@@ -148,33 +162,48 @@
   --sidebar-accent-foreground: #f9fafb;
   --sidebar-border: rgba(255, 255, 255, 0.1);
   --sidebar-hover: #374151;
-  
+
   /* Chart Colors */
-  --chart-primary: #60a5fa;
+  --chart-primary: #A8C5DA;
   --chart-secondary: #6b7280;
   --chart-accent: #3b82f6;
-  --chart-bar-1: #60a5fa;
-  --chart-bar-2: #3b82f6;
+  --chart-bar-1: #A8C5DA;
+  --chart-bar-2: rgba(168, 197, 218, 0.55);
   --chart-bar-3: #2563eb;
-  
+
+  /* Donut / pie specific colors (TotalSales) - dark mode */
+  --donut-1: #000000;
+  --donut-2: #34d399;
+  --donut-3: #60a5fa;
+  --donut-4: #2563eb;
+
+  /* Per-stat backgrounds (dark variants) */
+  --stat-orders-bg: rgba(59, 130, 246, 0.06);
+  --stat-revenue-bg: rgba(59, 130, 246, 0.04);
+  --stat-growth-bg: #E5ECF6;
+  --stat-default-bg: #E3F5FF;
+  --stat-cg-tc-bg: #000000;
+  --stat-or-tc-bg: #ffffff;
+
   /* Dashboard Specific */
   --stat-card-bg: rgba(59, 130, 246, 0.2);
   --stat-card-border: #374151;
-  
+  --chaeckbox-bg: #C6C7F8;
+
   /* Text Colors */
   --text-primary: #f9fafb;
   --text-secondary: #9ca3af;
   --text-tertiary: #6b7280;
   --text-muted: #4b5563;
-  
+
   /* Hover States */
   --hover-bg: #374151;
   --hover-border: #4b5563;
-  
+
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   --gradient-secondary: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
-  
+
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
@@ -184,8 +213,8 @@
 
 /* Status Badge Classes */
 .status-complete {
-  background-color: var(--success-light);
-  color: var(--success-dark);
+  background-color: transparent;
+  color: #1e3a8a;
   border-color: var(--success);
 }
 
@@ -232,18 +261,45 @@
 }
 
 /* Utility Classes */
-.bg-background { background-color: var(--background); }
-.bg-card { background-color: var(--card); }
-.bg-sidebar { background-color: var(--sidebar-bg); }
-.bg-hover:hover { background-color: var(--hover-bg); }
+.bg-background {
+  background-color: var(--background);
+}
 
-.text-primary { color: var(--text-primary); }
-.text-secondary { color: var(--text-secondary); }
-.text-tertiary { color: var(--text-tertiary); }
-.text-muted { color: var(--text-muted); }
+.bg-card {
+  background-color: var(--card);
+}
 
-.border-default { border-color: var(--border); }
-.border-hover:hover { border-color: var(--border-hover); }
+.bg-sidebar {
+  background-color: var(--sidebar-bg);
+}
+
+.bg-hover:hover {
+  background-color: var(--hover-bg);
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-tertiary {
+  color: var(--text-tertiary);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.border-default {
+  border-color: var(--border);
+}
+
+.border-hover:hover {
+  border-color: var(--border-hover);
+}
 
 /* Gradient Utilities */
 .gradient-primary {

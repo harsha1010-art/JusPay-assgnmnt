@@ -10,7 +10,7 @@ const Navmenu = () => {
   const { toggleNotifications } = useNotifications();
 
   return (
-    <div className="flex items-center justify-between bg-card text-primary border-b border-default px-6 py-3">
+    <div className="flex items-center justify-between bg-primary text-primary border-b border-default px-6 py-3">
       {/* Left - Breadcrumb */}
       <div className="flex items-center gap-2 text-sm">
         <PanelLeft

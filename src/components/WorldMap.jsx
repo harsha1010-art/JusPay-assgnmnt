@@ -1,63 +1,112 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 
-const WorldMap = () => {
+const RevenueByLocation = () => {
+  const [colors, setColors] = useState({});
+
+  useEffect(() => {
+    const updateColors = () => {
+      const rootStyles = getComputedStyle(document.documentElement);
+      setColors({
+        foreground: rootStyles.getPropertyValue('--foreground').trim() || '#111827',
+        background: rootStyles.getPropertyValue('--background').trim() || '#f9fafb',
+        border: rootStyles.getPropertyValue('--border').trim() || '#e5e7eb',
+        chartBar1: rootStyles.getPropertyValue('--chart-bar-1').trim() || '#A8C5DA',
+        textSecondary: rootStyles.getPropertyValue('--text-secondary').trim() || '#6b7280',
+        textPrimary: rootStyles.getPropertyValue('--text-primary').trim() || '#111827',
+      });
+    };
+
+    updateColors();
+
+    // Listen for theme changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          updateColors();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const locations = [
+    { city: "New York", value: 72 },
+    { city: "San Francisco", value: 39 },
+    { city: "Sydney", value: 25 },
+    { city: "Singapore", value: 61 },
+  ];
+
+  // Positions of dots (approximate % based on map image)
+  const dots = [
+    { top: "38%", left: "32%" }, // New York
+    { top: "40%", left: "26%" }, // San Francisco
+    { top: "75%", left: "83%" }, // Sydney
+    { top: "52%", left: "78%" }, // Singapore
+  ];
+
   return (
-    <div className="bg-card rounded-lg p-6 shadow-sm">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-lg font-semibold text-primary">Revenue by Location</h2>
-        <div className="flex items-center space-x-4">
-          <select className="bg-transparent text-secondary text-sm border-none focus:ring-0">
-            <option value="monthly">Monthly</option>
-            <option value="yearly">Yearly</option>
-          </select>
-        </div>
-      </div>
-      
-      <div className="relative h-[300px] w-full">
-        <img 
-          src="/world-map.svg" 
+    <div className="bg-card rounded-2xl  p-6 w-[100%]">
+      <h3 className="text-base font-semibold text-primary mb-4">
+        Revenue by Location
+      </h3>
+
+      {/* 🌍 World Map */}
+      <div className="relative w-full h-40 mb-6">
+        <img
+          src="/world-map.svg"
           alt="World Map"
-          className="w-full h-full object-cover opacity-70 dark:opacity-50"
+          className="w-full h-full object-contain opacity-80"
         />
+        {dots.map((dot, index) => (
+          <div
+            key={index}
+            className="absolute w-3 h-3 rounded-full shadow-sm"
+            style={{
+              top: dot.top,
+              left: dot.left,
+              transform: "translate(-50%, -50%)",
+              backgroundColor: colors.foreground || '#111827',
+              border: `3px solid ${colors.background || '#f9fafb'}`
+            }}
+          ></div>
+        ))}
       </div>
 
-      <div className="grid grid-cols-2 gap-4 mt-6">
-        <div className="space-y-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-[var(--chart-primary)]"></div>
-              <span className="text-sm text-secondary">United States</span>
+      {/* 📊 City List */}
+      <div className="space-y-4">
+        {locations.map((loc) => (
+          <div key={loc.city}>
+            <div className="flex justify-between items-center mb-1">
+              <span className="text-sm" style={{ color: colors.textSecondary || '#6b7280' }}>
+                {loc.city}
+              </span>
+              <span className="text-sm font-medium" style={{ color: colors.textPrimary || '#111827' }}>
+                {loc.value}K
+              </span>
             </div>
-            <span className="text-sm font-medium text-primary">$23.4k</span>
-          </div>
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-[var(--chart-primary)]"></div>
-              <span className="text-sm text-secondary">Canada</span>
+            <div 
+              className="w-full h-1 rounded-full overflow-hidden"
+              style={{ backgroundColor: colors.border || '#e5e7eb' }}
+            >
+              <div
+                className="h-1 rounded-full transition-all duration-500"
+                style={{ 
+                  width: `${(loc.value / 80) * 100}%`, 
+                  backgroundColor: colors.chartBar1 || '#A8C5DA'
+                }}
+              ></div>
             </div>
-            <span className="text-sm font-medium text-primary">$12.8k</span>
           </div>
-        </div>
-        
-        <div className="space-y-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-              <span className="text-sm text-secondary">India</span>
-            </div>
-            <span className="text-sm font-medium text-primary">$19.2k</span>
-          </div>
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-[var(--chart-primary)]"></div>
-              <span className="text-sm text-secondary">Australia</span>
-            </div>
-            <span className="text-sm font-medium text-primary">$15.6k</span>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
 };
 
-export default WorldMap;
+export default RevenueByLocation;

@@ -1,23 +1,109 @@
-import React from 'react';
-import { ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { TrendingDown, TrendingUp } from 'lucide-react';
+import { color } from 'chart.js/helpers';
 
 const StatsCard = ({ title, value, change, isPositive }) => {
+  const [colors, setColors] = useState({});
+
+  useEffect(() => {
+    const updateColors = () => {
+      const rootStyles = getComputedStyle(document.documentElement);
+      setColors({
+        statOrdersBg: rootStyles.getPropertyValue('--card').trim() || '#F7F9FB',
+        statRevenueBg: rootStyles.getPropertyValue('--card').trim() || '#F7F9FB',
+        statGrowthBg: rootStyles.getPropertyValue('--stat-growth-bg').trim() || '#E5ECF6',
+        statDefaultBg: rootStyles.getPropertyValue('--stat-default-bg').trim() || '#E3F5FF',
+        textSecondary: rootStyles.getPropertyValue('--text-secondary').trim() || '#6b7280',
+        foreground: rootStyles.getPropertyValue('--foreground').trim() || '#111827',
+        success: rootStyles.getPropertyValue('--success').trim() || '#10b981',
+        ortext : rootStyles.getPropertyValue('--stat-or-tc-bg').trim() || '#000000ff',
+        cgtext: rootStyles.getPropertyValue('--stat-cg-tc-bg').trim() || '#000000ff',
+        error: rootStyles.getPropertyValue('--error').trim() || '#ef4444',
+        border: '#000000',
+      });
+    };
+
+    updateColors();
+
+    // Listen for theme changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          updateColors();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // 🎨 Set background color dynamically based on title
+  let bgColor;
+  let tcolor;
+
+  if (title === 'Orders') {
+    bgColor = colors.statOrdersBg;
+    tcolor = colors.ortext;
+  } else if (title === 'Revenue') {
+    bgColor = colors.statRevenueBg;
+    tcolor = colors.ortext;
+  } else if (title === 'Growth') {
+    bgColor = colors.statGrowthBg;
+    tcolor = colors.cgtext;
+  } else {
+    bgColor = colors.statDefaultBg;
+    tcolor =  colors.cgtext;
+  }
+
+  const handleClick = () => {
+    if (title === 'Orders') {
+      window.location.href = '/orders';
+    }
+  };
+
   return (
-    <div className="bg-card rounded-xl border border-default p-6 hover:shadow-sm transition-shadow">
+    <div
+      className="rounded-xl border p-6 hover:shadow-sm transition-shadow"
+      style={{ 
+        backgroundColor: bgColor,
+        borderColor: '#00000010',
+        cursor: title === 'Orders' ? 'pointer' : 'default'
+      }}
+      onClick={handleClick}
+    >
       <div className="flex justify-between items-start mb-4">
-        <span className="text-sm text-secondary font-medium">{title}</span>
-        <div className={`flex items-center gap-1 text-sm font-medium ${
-          isPositive ? 'text-success' : 'text-error'
-        }`}>
-          {isPositive ? (
-            <ArrowUpRight size={16} strokeWidth={2.5} />
-          ) : (
-            <ArrowDownRight size={16} strokeWidth={2.5} />
-          )}
+        <span 
+          className="text-sm font-medium"
+          style={{ color: tcolor }}
+        >
+          {title}
+        </span>
+      </div>
+
+      <div className="flex justify-between items-center text-2xl font-semibold">
+        <div 
+          className="value"
+          style={{ color: tcolor }}
+        >
+          {value}
+        </div>
+        <div
+          className="flex items-center gap-1 text-sm font-medium"
+          style={{ color: isPositive ? colors.success : colors.error }}
+        >
           {change}
+          {isPositive ? (
+            <TrendingUp size={16} strokeWidth={2.5} />
+          ) : (
+            <TrendingDown size={16} strokeWidth={2.5} />
+          )}
         </div>
       </div>
-      <div className="text-2xl font-semibold text-primary">{value}</div>
     </div>
   );
 };

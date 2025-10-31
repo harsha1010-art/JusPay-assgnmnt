@@ -6,6 +6,8 @@ import StatsCard from '../components/StatsCard'
 import RevenueTrendChart from '../components/RevenueTrendChart'
 import WorldMap from '../components/WorldMap'
 import TopProducts from '../components/TopProducts'
+import ProjectionsChart from '../components/ProjectionsChart'
+import TotalSalesDonut from '../components/TotalSalesDonut'
 
 function Dashboard() {
   const stats = [
@@ -47,52 +49,66 @@ function Dashboard() {
         <Navmenu />
 
         {/* Page Content */}
-        <div className="flex-1 p-8 overflow-y-auto space-y-8">
-          {/* Stats Cards */}
-          <div className="grid grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <StatsCard
-                key={index}
-                title={stat.title}
-                value={stat.value}
-                change={stat.change}
-                isPositive={stat.isPositive}
-              />
-            ))}
-          </div>
-
-          {/* Charts Section */}
+        <div className="flex-1 p-8 overflow-y-auto space-y-8 bg-background">
           <div className="grid grid-cols-3 gap-8">
-            {/* Revenue Trend */}
-            <div className="col-span-2 bg-card rounded-xl border border-default overflow-hidden">
-              <div className="p-6 border-b border-default">
-                <div className="flex justify-between items-center">
-                  <h2 className="text-lg font-semibold text-primary">Revenue</h2>
-                  <div className="flex items-center gap-6">
-                    <div className="flex items-center gap-2">
-                      <span className="w-3 h-3 rounded-full bg-[#3b82f6]"></span>
-                      <span className="text-sm text-secondary">Current Week <span className="text-primary font-medium ml-1">$58,211</span></span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-3 h-3 rounded-full bg-[#e5e7eb]"></span>
-                      <span className="text-sm text-secondary">Previous Week <span className="text-primary font-medium ml-1">$68,768</span></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="p-6">
-                <RevenueTrendChart />
+            <div className="col-span-2">
+              <div className="grid grid-cols-2 gap-6">
+                {stats.map((stat, index) => (
+                  <StatsCard
+                    key={index}
+                    title={stat.title}
+                    value={stat.value}
+                    change={stat.change}
+                    isPositive={stat.isPositive}
+                  />
+                ))}
               </div>
             </div>
 
-            {/* Revenue by Location */}
+            <div className="col-span-1">
+              <ProjectionsChart />
+            </div>
+          </div>
+
+          {/* Middle row: Revenue trend (wide) + World map */}
+          <div className="grid grid-cols-3 gap-8">
+            <div className="col-span-2">
+              <div className="bg-card rounded-xl  overflow-hidden">
+                <div className="p-6 border-b border-default">
+                  <div className="flex justify-between items-center">
+                    <h2 className="text-lg font-semibold text-primary">Revenue</h2>
+                    <div className="flex items-center gap-6">
+                      <div className="flex items-center gap-2">
+                        <span className="w-3 h-3 rounded-full" style={{ backgroundColor: 'var(--chart-bar-1)' }}></span>
+                        <span className="text-sm text-secondary">Current Week <span className="text-primary font-medium ml-1">$58,211</span></span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="w-3 h-3 rounded-full" style={{ backgroundColor: 'var(--foreground)' }}></span>
+                        <span className="text-sm text-secondary">Previous Week <span className="text-primary font-medium ml-1">$68,768</span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <RevenueTrendChart />
+                </div>
+              </div>
+            </div>
+
             <div className="col-span-1">
               <WorldMap />
             </div>
           </div>
 
-          {/* Top Products */}
-          <TopProducts />
+          {/* Bottom row: Top Products + Total Sales donut */}
+          <div className="grid grid-cols-3 gap-8">
+            <div className="col-span-2 w-[100%]">
+              <TopProducts />
+            </div>
+            <div className="col-span-1">
+              <TotalSalesDonut />
+            </div>
+          </div>
         </div>
       </div>
 

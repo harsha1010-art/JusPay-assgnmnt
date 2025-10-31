@@ -110,5 +110,84 @@
       "date": "Feb 2, 2023",
       "status": "Rejected"
     }
+  ],
+
+  
+  "notifications": [
+    {
+      "icon": "bug",
+      "title": "You have a bug that needs...",
+      "time": "Just now"
+    },
+    {
+      "icon": "user",
+      "title": "New user registered",
+      "time": "59 minutes ago"
+    },
+    {
+      "icon": "bug",
+      "title": "You have a bug that needs...",
+      "time": "12 hours ago"
+    },
+    {
+      "icon": "radio",
+      "title": "Andi Lane subscribed to you",
+      "time": "Today, 11:59 AM"
+    }
+  ],
+  "activities": [
+    {
+      "avatar": "https://i.pravatar.cc/40?u=natali",
+      "title": "You have a bug that needs...",
+      "time": "Just now"
+    },
+    {
+      "avatar": "https://i.pravatar.cc/40?u=drew",
+      "title": "Released a new version",
+      "time": "59 minutes ago"
+    },
+    {
+      "avatar": "https://i.pravatar.cc/40?u=orlando",
+      "title": "Submitted a bug",
+      "time": "12 hours ago"
+    },
+    {
+      "avatar": "https://i.pravatar.cc/40?u=andi",
+      "title": "Modified A data in Page X",
+      "time": "Today, 11:59 AM"
+    },
+    {
+      "avatar": "https://i.pravatar.cc/40?u=kate",
+      "title": "Deleted a page in Project X",
+      "time": "Feb 2, 2023"
+    }
+  ],
+  "contacts": [
+    {
+      "name": "Natali Craig",
+      "avatar": "https://i.pravatar.cc/40?u=natali"
+    },
+    {
+      "name": "Drew Cano",
+      "avatar": "https://i.pravatar.cc/40?u=drew"
+    },
+    {
+      "name": "Orlando Diggs",
+      "avatar": "https://i.pravatar.cc/40?u=orlando"
+    },
+    {
+      "name": "Andi Lane",
+      "avatar": "https://i.pravatar.cc/40?u=andi"
+    },
+    {
+      "name": "Kate Morrison",
+      "avatar": "https://i.pravatar.cc/40?u=kate"
+    },
+    {
+      "name": "Koray Okumus",
+      "avatar": "https://i.pravatar.cc/40?u=koray"
+    }
   ]
+
+
 }
