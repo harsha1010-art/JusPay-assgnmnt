@@ -13,11 +13,14 @@ const Navmenu = () => {
     <div className="flex items-center justify-between bg-primary text-primary border-b border-default px-6 py-3">
       {/* Left - Breadcrumb */}
       <div className="flex items-center gap-2 text-sm">
-        <PanelLeft
-          size={16}
-          className="text-secondary cursor-pointer hover:text-primary transition"
-          onClick={toggleSidebar} // ✅ collapses sidebar
-        />
+        {/* Sidebar toggle button (keyboard & screen reader accessible) */}
+        <button
+          aria-label="Toggle sidebar"
+          onClick={toggleSidebar}
+          className="text-secondary hover:text-primary transition p-1 rounded"
+        >
+          <PanelLeft size={16} aria-hidden="true" />
+        </button>
         <Star size={14} className="text-yellow-500" />
         <span className="text-secondary">Dashboards</span>
         <span className="text-secondary">/</span>
@@ -34,30 +37,29 @@ const Navmenu = () => {
           <input
             type="text"
             placeholder="Search"
+            aria-label="Search site"
             className="bg-card text-primary text-sm pl-8 pr-3 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-default placeholder:text-secondary w-44"
           />
         </div>
 
-        {theme === "dark" ? (
-          <Moon
-            size={18}
-            className="cursor-pointer text-secondary hover:text-primary"
-            onClick={toggleTheme}
-          />
-        ) : (
-          <Sun
-            size={18}
-            className="cursor-pointer text-secondary hover:text-primary"
-            onClick={toggleTheme}
-          />
-        )}
+        {/* Theme toggle */}
+        <button aria-label="Toggle theme" onClick={toggleTheme} className="p-1 rounded">
+          {theme === "dark" ? (
+            <Moon size={18} aria-hidden="true" className="text-secondary hover:text-primary" />
+          ) : (
+            <Sun size={18} aria-hidden="true" className="text-secondary hover:text-primary" />
+          )}
+        </button>
 
-        <Bell 
-          size={18} 
-          className="cursor-pointer text-secondary hover:text-primary"
-          onClick={toggleNotifications}
-        />
-        <Settings size={18} className="cursor-pointer text-secondary hover:text-primary" />
+        {/* Notifications (opens the notification sidebar) */}
+        <button aria-label="Open notifications" onClick={toggleNotifications} className="p-1 rounded">
+          <Bell size={18} aria-hidden="true" className="text-secondary hover:text-primary" />
+        </button>
+
+        {/* Settings */}
+        <button aria-label="Settings" className="p-1 rounded">
+          <Settings size={18} aria-hidden="true" className="text-secondary hover:text-primary" />
+        </button>
       </div>
     </div>
   );

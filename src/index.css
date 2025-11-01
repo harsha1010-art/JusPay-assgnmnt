@@ -1,2 +1,6 @@
 @import "./variable.css";
 @import "tailwindcss";
+
+:root{
+    overflow: hidden;
+}

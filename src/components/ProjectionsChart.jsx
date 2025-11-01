@@ -118,13 +118,14 @@ const ProjectionsChart = () => {
   }), [colors]);
 
   return (
-    <div className="bg-card rounded-xl  overflow-hidden h-full p-4">
+    <div className="bg-card rounded-xl  overflow-hidden h-full p-4" role="region" aria-labelledby="projections-heading">
       <div className="flex items-center justify-between mb-2">
-        <h3 className="text-sm font-medium text-primary">Projections vs Actuals</h3>
+        <h3 id="projections-heading" className="text-sm font-medium text-primary">Projections vs Actuals</h3>
       </div>
-      <div className="h-[calc(100%-32px)]">
+      <figure className="h-[calc(100%-32px)]" role="img" aria-label="Bar chart comparing projections vs actuals">
+        <figcaption className="sr-only">Bar chart comparing projections and actual values across months.</figcaption>
         {colors.chartBar1 && <Bar options={options} data={data} />}
-      </div>
+      </figure>
     </div>
   )
 }

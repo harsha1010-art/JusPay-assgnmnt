@@ -39,26 +39,30 @@ function Dashboard() {
 
 
   return (
-    <div className="flex h-screen bg-background text-primary">
+    <div className="flex h-screen overflow-hidden bg-background text-primary">
       {/* Sidebar */}
       <Sidebar />
 
       {/* Main Content Area */}
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 min-h-0">
         {/* Top Navbar */}
         <Navmenu />
 
-        {/* Page Content */}
-<div
-  className="flex-1 p-8 overflow-y-auto space-y-8 bg-background"
-  style={{
-    scrollbarWidth: 'thin',
-    scrollbarColor: 'rgba(255,255,255,0.2) transparent', // subtle light scrollbar
-  }}
->
-          <div className="grid grid-cols-3 gap-8">
+        {/* Page Content - Scrollable area with proper spacing */}
+        <main
+          className="flex-1 px-6 py-4 overflow-y-auto space-y-4 bg-background"
+          role="main"
+          aria-label="Dashboard main content"
+          style={{
+            scrollbarWidth: 'thin',
+            scrollbarColor: 'var(--text-secondary) var(--background)',
+            msOverflowStyle: '-ms-autohiding-scrollbar'
+          }}
+        >
+          {/* Top row: Stats cards (2x2 grid) + Projections chart */}
+          <div className="grid grid-cols-3 gap-4">
             <div className="col-span-2">
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-4">
                 {stats.map((stat, index) => (
                   <StatsCard
                     key={index}
@@ -77,25 +81,25 @@ function Dashboard() {
           </div>
 
           {/* Middle row: Revenue trend (wide) + World map */}
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid grid-cols-3 gap-4">
             <div className="col-span-2">
-              <div className="bg-card rounded-xl  overflow-hidden">
-                <div className="p-6 border-b border-default">
+              <div className="bg-card rounded-xl overflow-hidden">
+                <div className="p-4 border-b border-default">
                   <div className="flex justify-between items-center">
                     <h2 className="text-lg font-semibold text-primary">Revenue</h2>
-                    <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-4">
                       <div className="flex items-center gap-2">
-                        <span className="w-3 h-3 rounded-full" style={{ backgroundColor: 'var(--chart-bar-1)' }}></span>
+                        <span aria-hidden="true" className="w-3 h-3 rounded-full" style={{ backgroundColor: 'var(--chart-bar-1)' }}></span>
                         <span className="text-sm text-secondary">Current Week <span className="text-primary font-medium ml-1">$58,211</span></span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="w-3 h-3 rounded-full" style={{ backgroundColor: 'var(--foreground)' }}></span>
+                        <span aria-hidden="true" className="w-3 h-3 rounded-full" style={{ backgroundColor: 'var(--foreground)' }}></span>
                         <span className="text-sm text-secondary">Previous Week <span className="text-primary font-medium ml-1">$68,768</span></span>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="p-6">
+                <div className="p-4">
                   <RevenueTrendChart />
                 </div>
               </div>
@@ -107,15 +111,15 @@ function Dashboard() {
           </div>
 
           {/* Bottom row: Top Products + Total Sales donut */}
-          <div className="grid grid-cols-3 gap-8">
-            <div className="col-span-2 w-[100%]">
+          <div className="grid grid-cols-3 gap-4">
+            <div className="col-span-2 w-[100%] h-full">
               <TopProducts />
             </div>
-            <div className="col-span-1">
+            <div className="col-span-1 h-full">
               <TotalSalesDonut />
             </div>
           </div>
-        </div>
+        </main>
       </div>
 
       {/* Notification Sidebar */}

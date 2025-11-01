@@ -49,6 +49,8 @@ const NotificationSidebar = () => {
         borderColor: colors.border,
         backgroundColor: colors.background,
       }}
+      role="dialog"
+      aria-labelledby="notifications-heading"
       aria-hidden={!isOpen}
     >
       <div className="h-full flex flex-col">
@@ -58,6 +60,7 @@ const NotificationSidebar = () => {
           style={{ borderColor: colors.border }}
         >
           <h2 
+            id="notifications-heading"
             className="text-lg font-semibold"
             style={{ color: colors.foreground }}
           >
@@ -87,19 +90,22 @@ const NotificationSidebar = () => {
             </h3>
             <div className="space-y-3">
               {data.notifications.map((item, idx) => (
-                <div 
-                  key={idx} 
-                  className="flex items-start gap-3 p-2 rounded-lg transition-colors cursor-pointer"
+                <button
+                  key={idx}
+                  type="button"
+                  aria-label={item.title}
+                  className="flex items-start gap-3 p-2 rounded-lg transition-colors"
                   onMouseEnter={(e) => e.currentTarget.style.backgroundColor = colors.hoverBg}
                   onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                 >
                   <div 
                     className="flex items-center justify-center w-8 h-8 rounded-xl"
                     style={{ backgroundColor: colors.muted }}
+                    aria-hidden="true"
                   >
-                    {item.icon === 'bug' && <Bug size={16} style={{ color: colors.foreground }} />}
-                    {item.icon === 'user' && <UserPlus size={16} style={{ color: colors.foreground }} />}
-                    {item.icon === 'radio' && <Radio size={16} style={{ color: colors.foreground }} />}
+                    {item.icon === 'bug' && <Bug size={16} style={{ color: colors.foreground }} aria-hidden="true" />}
+                    {item.icon === 'user' && <UserPlus size={16} style={{ color: colors.foreground }} aria-hidden="true" />}
+                    {item.icon === 'radio' && <Radio size={16} style={{ color: colors.foreground }} aria-hidden="true" />}
                   </div>
                   <div>
                     <p 
@@ -115,7 +121,7 @@ const NotificationSidebar = () => {
                       {item.time}
                     </span>
                   </div>
-                </div>
+                </button>
               ))}
             </div>
           </section>
@@ -133,7 +139,12 @@ const NotificationSidebar = () => {
               style={{ borderLeft: `1px solid ${colors.border}` }}
             >
               {data.activities.map((act, idx) => (
-                <div key={idx} className="flex gap-3 items-start relative left-[-16px]">
+                <button
+                  key={idx}
+                  type="button"
+                  aria-label={act.title}
+                  className="flex gap-3 items-start relative left-[-16px]"
+                >
                   <img
                     src={act.avatar}
                     alt={act.title}
@@ -157,7 +168,7 @@ const NotificationSidebar = () => {
                       {act.time}
                     </span>
                   </div>
-                </div>
+                </button>
               ))}
             </div>
           </section>
@@ -172,9 +183,11 @@ const NotificationSidebar = () => {
             </h3>
             <div className="space-y-2">
               {data.contacts.map((contact, idx) => (
-                <div
+                <button
                   key={idx}
-                  className="flex items-center gap-3 p-2 rounded-lg cursor-pointer transition-colors"
+                  type="button"
+                  aria-label={contact.name}
+                  className="flex items-center gap-3 p-2 rounded-lg transition-colors"
                   onMouseEnter={(e) => e.currentTarget.style.backgroundColor = colors.hoverBg}
                   onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                 >
@@ -189,7 +202,7 @@ const NotificationSidebar = () => {
                   >
                     {contact.name}
                   </span>
-                </div>
+                </button>
               ))}
             </div>
           </section>

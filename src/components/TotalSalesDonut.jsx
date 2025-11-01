@@ -65,11 +65,14 @@ const TotalSalesDonut = () => {
   const percentage = ((mainValue / total) * 100).toFixed(1)
 
   return (
-    <div className="bg-card rounded-2xl p-6 w-full">
-      <h3 className="text-base font-semibold text-primary mb-4">Total Sales</h3>
+    <div className="bg-card rounded-2xl p-6 w-full" role="region" aria-labelledby="total-sales-heading">
+      <h3 id="total-sales-heading" className="text-base font-semibold text-primary mb-4">Total Sales</h3>
 
-      <div className="relative flex justify-center items-center h-48 mb-6">
+      {/* Chart - wrap in figure with accessible label/description */}
+      <figure className="relative flex justify-center items-center h-48 mb-6" role="img" aria-label={`Total sales donut chart showing ${percentage}% from ${labels[0]}`}>
         {colors.card && <Doughnut data={data} options={options} />}
+        <figcaption className="sr-only">Donut chart representing sales split by channel.</figcaption>
+
         <div className="absolute flex flex-col items-center">
           <div
             className="text-white text-xs font-medium rounded-md px-2 py-1"
@@ -78,22 +81,23 @@ const TotalSalesDonut = () => {
             {percentage}%
           </div>
         </div>
-      </div>
+      </figure>
 
-      <div className="space-y-2">
+      <ul className="space-y-2" role="list" aria-label="Sales breakdown">
         {labels.map((label, index) => (
-          <div key={label} className="flex justify-between text-sm">
+          <li key={label} className="flex justify-between text-sm" role="listitem">
             <div className="flex items-center gap-2">
               <span
                 className="w-3 h-3 rounded-full"
                 style={{ backgroundColor: segmentColors[index] }}
+                aria-hidden="true"
               />
               <span className="text-secondary">{label}</span>
             </div>
             <span className="text-primary font-medium">${values[index]}</span>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   )
 }

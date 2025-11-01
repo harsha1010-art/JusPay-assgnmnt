@@ -82,11 +82,12 @@ const Orders = () => {
         {/* Top Navbar */}
         <Navmenu />
 
-        {/* Page Content */}
-        <div className="flex-1 p-6 overflow-y-auto">
+  {/* Page Content */}
+  <main className="flex-1 p-6 overflow-y-auto" role="main" aria-labelledby="orders-heading">
           {/* Header */}
           <div className="flex justify-between items-center mb-6">
-            <h1 className="text-2xl font-semibold text-primary">Order List</h1>
+            {/* Page title — referenced by main[aria-labelledby] for screen readers */}
+            <h1 id="orders-heading" className="text-2xl font-semibold text-primary">Order List</h1>
           </div>
 
           {/* Filters */}
@@ -139,6 +140,7 @@ const Orders = () => {
               <input
                 type="text"
                 placeholder="Search"
+                aria-label="Search orders"
                 className="w-full h-9 pl-9 pr-4 rounded-lg bg-background text-sm text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary focus:outline-none transition"
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
@@ -150,12 +152,14 @@ const Orders = () => {
 
       {/* Table */}
       <div className="bg-background  rounded-lg overflow-hidden">
-        <table className="w-full">
+        <table className="w-full" role="table" aria-describedby="orders-summary">
+          <caption className="sr-only">Orders table</caption>
           <thead>
             <tr className="border-b border-default">
               <th className="px-6 py-4">
                 <input
                   type="checkbox"
+                  aria-label="Select all orders"
                   className="rounded border-default text-primary focus:ring-primary"
                   checked={selectedOrders.length === filteredOrders.length}
                   onChange={handleSelectAll}
@@ -209,16 +213,17 @@ const Orders = () => {
               <tr key={order.id} className="border-b border-default last:border-0">
                 <td className="px-6 py-4">
                 <input
-  type="checkbox"
-  className="rounded border-default  transition-all duration-200 hover:none"
-  checked={selectedOrders.includes(order.id)}
-  onChange={() => handleSelectOrder(order.id)}
-  style={{
-    accentColor: getComputedStyle(document.documentElement)
-      .getPropertyValue('--chaeckbox-bg')
-      .trim() || '#3b82f6',
-  }}
-/>
+                  type="checkbox"
+                  aria-label={`Select order ${order.id}`}
+                  className="rounded border-default  transition-all duration-200 hover:none"
+                  checked={selectedOrders.includes(order.id)}
+                  onChange={() => handleSelectOrder(order.id)}
+                  style={{
+                    accentColor: getComputedStyle(document.documentElement)
+                      .getPropertyValue('--chaeckbox-bg')
+                      .trim() || '#3b82f6',
+                  }}
+                />
 
                 </td>
                 <td className="px-6 py-4 text-primary font-medium">{order.id}</td>
@@ -247,12 +252,13 @@ const Orders = () => {
 
         {/* Pagination */}
         <div className="px-6 py-4 border-t border-default flex items-center justify-between">
-          <div className="text-sm text-secondary">
+          <div id="orders-summary" className="text-sm text-secondary">
             Showing {(currentPage - 1) * itemsPerPage + 1} to {Math.min(currentPage * itemsPerPage, filteredOrders.length)} of {ordersData.orders.length} results
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              aria-label="Previous page"
               disabled={currentPage === 1}
               className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm
                 ${currentPage === 1 
@@ -266,6 +272,8 @@ const Orders = () => {
               <button
                 key={page}
                 onClick={() => setCurrentPage(page)}
+                aria-label={`Page ${page}`}
+                aria-current={page === currentPage ? 'page' : undefined}
                 className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm
                   ${page === currentPage ? 'text-secondary' : 'text-secondary hover:text-primary hover:bg-hover'}`}
                 style={page === currentPage ? { backgroundColor: '#a7a7a750', color: 'var(--primary)' } : {}}
@@ -275,6 +283,7 @@ const Orders = () => {
             ))}
             <button
               onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              aria-label="Next page"
               disabled={currentPage === totalPages}
               className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm
                 ${currentPage === totalPages 
@@ -288,7 +297,7 @@ const Orders = () => {
         </div>
       </div>
 
-        </div>
+        </main>
       </div>
 
       {/* Notification Sidebar */}

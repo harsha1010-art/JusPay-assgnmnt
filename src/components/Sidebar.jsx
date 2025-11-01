@@ -102,7 +102,8 @@ const Sidebar = () => {
         )}
       </div>
 
-      <nav className="flex-1 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
+  {/* Navigation landmark for screen readers */}
+  <nav role="navigation" aria-label="Main sidebar" className="flex-1 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
         {menuData.map((section, index) => (
           <div key={index} className="mb-6">
             {!collapsed && (
@@ -153,7 +154,8 @@ const Sidebar = () => {
                       ))}
 
                     <div className="flex items-center gap-3">
-                      {item.icon}
+                      {/* Icon is decorative for screen readers */}
+                      <span aria-hidden="true">{item.icon}</span>
                       {!collapsed && <span>{item.name}</span>}
                     </div>
                   </NavLink>

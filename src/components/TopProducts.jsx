@@ -10,18 +10,20 @@ const TopProducts = () => {
   ];
 
   return (
-    <div className="bg-card rounded-xl ">
+    // Top products card (accessible region)
+    <div className="bg-card rounded-xl " role="region" aria-labelledby="top-products-heading">
       <div className="px-6 py-4 border-b border-default">
-        <h3 className="text-lg font-semibold text-primary">Top Selling Products</h3>
+        <h3 id="top-products-heading" className="text-lg font-semibold text-primary">Top Selling Products</h3>
       </div>
       <div className="overflow-x-auto">
-        <table className="w-full">
+        <table className="w-full" role="table" aria-describedby="top-products-desc">
+          <caption className="sr-only">Top selling products</caption>
           <thead>
             <tr className="border-b border-default">
-              <th className="text-left px-6 py-3 text-sm font-medium text-secondary">Name</th>
-              <th className="text-right px-6 py-3 text-sm font-medium text-secondary">Price</th>
-              <th className="text-right px-6 py-3 text-sm font-medium text-secondary">Quantity</th>
-              <th className="text-right px-6 py-3 text-sm font-medium text-secondary">Amount</th>
+              <th scope="col" className="text-left px-6 py-3 text-sm font-medium text-secondary">Name</th>
+              <th scope="col" className="text-right px-6 py-3 text-sm font-medium text-secondary">Price</th>
+              <th scope="col" className="text-right px-6 py-3 text-sm font-medium text-secondary">Quantity</th>
+              <th scope="col" className="text-right px-6 py-3 text-sm font-medium text-secondary">Amount</th>
             </tr>
           </thead>
           <tbody>
@@ -35,6 +37,7 @@ const TopProducts = () => {
             ))}
           </tbody>
         </table>
+        <div id="top-products-desc" className="sr-only">List of top selling products with price, quantity and total amount</div>
       </div>
     </div>
   );

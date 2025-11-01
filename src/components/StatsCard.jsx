@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { TrendingDown, TrendingUp } from 'lucide-react';
-import { color } from 'chart.js/helpers';
 
 const StatsCard = ({ title, value, change, isPositive }) => {
   const [colors, setColors] = useState({});
@@ -67,6 +66,7 @@ const StatsCard = ({ title, value, change, isPositive }) => {
   };
 
   return (
+    // Card region — use role=button when clickable (Orders card navigates to Orders page)
     <div
       className="rounded-xl border p-6 hover:shadow-sm transition-shadow"
       style={{ 
@@ -75,6 +75,16 @@ const StatsCard = ({ title, value, change, isPositive }) => {
         cursor: title === 'Orders' ? 'pointer' : 'default'
       }}
       onClick={handleClick}
+      role={title === 'Orders' ? 'button' : 'region'}
+      aria-label={title === 'Orders' ? `${title} stats - open orders` : `${title} stats`}
+      tabIndex={title === 'Orders' ? 0 : -1}
+      onKeyDown={e => {
+        // Make keyboard interaction consistent with mouse click
+        if (title === 'Orders' && (e.key === 'Enter' || e.key === ' ')) {
+          e.preventDefault();
+          handleClick();
+        }
+      }}
     >
       <div className="flex justify-between items-start mb-4">
         <span 
@@ -98,9 +108,9 @@ const StatsCard = ({ title, value, change, isPositive }) => {
         >
           {change}
           {isPositive ? (
-            <TrendingUp size={16} strokeWidth={2.5} />
+            <TrendingUp size={16} strokeWidth={2.5} aria-hidden="true" />
           ) : (
-            <TrendingDown size={16} strokeWidth={2.5} />
+            <TrendingDown size={16} strokeWidth={2.5} aria-hidden="true" />
           )}
         </div>
       </div>

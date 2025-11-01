@@ -51,8 +51,8 @@ const RevenueByLocation = () => {
   ];
 
   return (
-    <div className="bg-card rounded-2xl  p-6 w-[100%]">
-      <h3 className="text-base font-semibold text-primary mb-4">
+    <div className="bg-card rounded-2xl  p-6 w-[100%]" role="region" aria-labelledby="revenue-location-heading">
+      <h3 id="revenue-location-heading" className="text-base font-semibold text-primary mb-4">
         Revenue by Location
       </h3>
 
@@ -60,12 +60,13 @@ const RevenueByLocation = () => {
       <div className="relative w-full h-40 mb-6">
         <img
           src="/world-map.svg"
-          alt="World Map"
+          alt="World map showing revenue hotspots"
           className="w-full h-full object-contain opacity-80"
         />
         {dots.map((dot, index) => (
           <div
             key={index}
+            aria-hidden="true"
             className="absolute w-3 h-3 rounded-full shadow-sm"
             style={{
               top: dot.top,
@@ -76,6 +77,7 @@ const RevenueByLocation = () => {
             }}
           ></div>
         ))}
+        <div className="sr-only">Map visualization showing revenue hotspots by city.</div>
       </div>
 
       {/* 📊 City List */}

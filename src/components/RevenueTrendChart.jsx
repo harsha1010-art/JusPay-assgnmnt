@@ -129,9 +129,10 @@ const RevenueTrendChart = () => {
   }), [colors]);
 
   return (
-    <div className="h-[300px] w-full">
+    <figure className="h-[300px] w-full" role="img" aria-label="Revenue trend line chart">
+      <figcaption className="sr-only">Line chart showing revenue trend over months</figcaption>
       {colors.chartBar1 && <Line data={data} options={options} />}
-    </div>
+    </figure>
   );
 };
 
