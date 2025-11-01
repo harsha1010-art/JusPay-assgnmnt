@@ -11,6 +11,8 @@
 
   /* Primary Colors */
   --primary: #1f2937;
+  --primary-light: #1C1C1C66;
+  --primary-dark: #1C1C1C33;
   --primary-foreground: #f9fafb;
 
   /* Secondary Colors */
@@ -117,7 +119,8 @@
   /* Primary Colors */
   --primary: #e5e7eb;
   --primary-foreground: #1f2937;
-
+  --primary-light: #FFFFFF66;
+  --primary-dark: #FFFFFF33;
   /* Secondary Colors */
   --secondary: #374151;
   --secondary-foreground: #f9fafb;

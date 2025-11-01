@@ -118,14 +118,14 @@ const Sidebar = () => {
           {!collapsed && (
             <div className="flex gap-4 mb-2">
               <button
-                className={`text-xs uppercase select-none font-semibold transition px-1 py-0.5 rounded ${favTab === "Favorites" ? "text-primary" : "text-secondary hover:text-primary"}`}
+                className={`text-xs uppercase select-none font-semibold  transition px-1 py-0.5 rounded ${favTab === "Favorites" ? "text-[var(--primary-light)]" : "text-[var(--primary-dark)] hover:text-primary"}`}
                 onClick={() => setFavTab("Favorites")}
                 aria-pressed={favTab === "Favorites"}
               >
                 Favorites
               </button>
               <button
-                className={`text-xs uppercase select-none font-semibold transition px-1 py-0.5 rounded ${favTab === "Recently" ? "text-primary" : "text-secondary hover:text-primary"}`}
+                className={`text-xs uppercase select-none font-semibold transition px-1 py-0.5 rounded ${favTab === "Recently" ? "text-[var(--primary-light)]" : "text-[var(--primary-dark)] hover:text-primary"}`}
                 onClick={() => setFavTab("Recently")}
                 aria-pressed={favTab === "Recently"}
               >

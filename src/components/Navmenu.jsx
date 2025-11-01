@@ -22,7 +22,7 @@ const Navmenu = () => {
           <PanelLeft size={16} aria-hidden="true" />
         </button>
         <Star size={14} className="text-yellow-500" />
-        <span className="text-secondary">Dashboards</span>
+        <span className="text-[var(--primary-dark)]">Dashboards</span>
         <span className="text-secondary">/</span>
         <span className="text-primary font-medium">Default</span>
       </div>
