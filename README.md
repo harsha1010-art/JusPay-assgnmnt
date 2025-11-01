@@ -2,7 +2,7 @@
 
 A modern, responsive admin dashboard built with React and Vite, featuring dark mode, real-time data visualization, and accessibility features.
 
-🌐 [Live Demo](https://juspay-dashboard.netlify.app)  
+🌐 [Live Demo](https://juspay10.netlify.app/)  
 🔗 [GitHub Repository](https://github.com/harsha1010-art/JusPay-assgnmnt)
 
 ## ✨ Features
