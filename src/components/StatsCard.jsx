@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { TrendingDown, TrendingUp } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const StatsCard = ({ title, value, change, isPositive }) => {
   const [colors, setColors] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     const updateColors = () => {
@@ -15,7 +17,7 @@ const StatsCard = ({ title, value, change, isPositive }) => {
         textSecondary: rootStyles.getPropertyValue('--text-secondary').trim() || '#6b7280',
         foreground: rootStyles.getPropertyValue('--foreground').trim() || '#111827',
         success: rootStyles.getPropertyValue('--success').trim() || '#10b981',
-        ortext : rootStyles.getPropertyValue('--stat-or-tc-bg').trim() || '#000000ff',
+        ortext: rootStyles.getPropertyValue('--stat-or-tc-bg').trim() || '#000000ff',
         cgtext: rootStyles.getPropertyValue('--stat-cg-tc-bg').trim() || '#000000ff',
         error: rootStyles.getPropertyValue('--error').trim() || '#ef4444',
         border: '#000000',
@@ -56,31 +58,31 @@ const StatsCard = ({ title, value, change, isPositive }) => {
     tcolor = colors.cgtext;
   } else {
     bgColor = colors.statDefaultBg;
-    tcolor =  colors.cgtext;
+    tcolor = colors.cgtext;
   }
 
   const handleClick = () => {
     if (title === 'Orders') {
-      window.location.href = '/orders';
+      navigate('/orders');
     }
   };
 
+  const isClickable = title === 'Orders';
+
   return (
-    // Card region — use role=button when clickable (Orders card navigates to Orders page)
     <div
       className="rounded-xl border p-6 hover:shadow-sm transition-shadow"
       style={{ 
         backgroundColor: bgColor,
         borderColor: '#00000010',
-        cursor: title === 'Orders' ? 'pointer' : 'default'
+        cursor: isClickable ? 'pointer' : 'default'
       }}
       onClick={handleClick}
-      role={title === 'Orders' ? 'button' : 'region'}
-      aria-label={title === 'Orders' ? `${title} stats - open orders` : `${title} stats`}
-      tabIndex={title === 'Orders' ? 0 : -1}
+      role={isClickable ? 'button' : 'region'}
+      aria-label={isClickable ? `${title} stats - open orders` : `${title} stats`}
+      tabIndex={isClickable ? 0 : -1}
       onKeyDown={e => {
-        // Make keyboard interaction consistent with mouse click
-        if (title === 'Orders' && (e.key === 'Enter' || e.key === ' ')) {
+        if (isClickable && (e.key === 'Enter' || e.key === ' ')) {
           e.preventDefault();
           handleClick();
         }
