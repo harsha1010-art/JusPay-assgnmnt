@@ -1,6 +1,6 @@
 import React from "react";
 import { Search, Sun, Moon, Bell, Settings, Star, PanelLeft, PanelRight, HistoryIcon } from "lucide-react";
-import { useSidebar } from "../context/Sidebarcontext";
+import { useSidebar } from "../context/SidebarContext";
 import { useTheme } from "../context/ThemeContext";
 import { useNotifications } from "../context/NotificationContext";
 
