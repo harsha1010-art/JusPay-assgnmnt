@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSidebar } from "../context/SidebarContext";
+import { useSidebar } from "../context/Sidebarcontext";
 import {
   LayoutDashboard,
   Users,
