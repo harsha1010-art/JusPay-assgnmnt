@@ -2,9 +2,9 @@
 
 :root {
   /* Base Colors - Light Mode */
-  --background: #f9fafb;
+  --background: #FFFFFF;
   --foreground: #111827;
-  --card: #f7f9fb;
+  --card: #F7F9FB;
   --card-foreground: #111827;
   --popover: #ffffff;
   --popover-foreground: #111827;

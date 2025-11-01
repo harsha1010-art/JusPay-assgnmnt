@@ -49,7 +49,13 @@ function Dashboard() {
         <Navmenu />
 
         {/* Page Content */}
-        <div className="flex-1 p-8 overflow-y-auto space-y-8 bg-background">
+<div
+  className="flex-1 p-8 overflow-y-auto space-y-8 bg-background"
+  style={{
+    scrollbarWidth: 'thin',
+    scrollbarColor: 'rgba(255,255,255,0.2) transparent', // subtle light scrollbar
+  }}
+>
           <div className="grid grid-cols-3 gap-8">
             <div className="col-span-2">
               <div className="grid grid-cols-2 gap-6">

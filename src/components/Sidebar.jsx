@@ -133,7 +133,7 @@ const Sidebar = () => {
                       }
                     }}
                     className={({ isActive }) =>
-                      `flex gap-2 items-center px-3 py-2 rounded-md text-sm font-medium cursor-pointer transition-all duration-200 ${
+                      `flex gap-2 items-center px-3 py-2 rounded-md text-sm font-medium cursor-pointer transition-all duration-300 ${
                         isActive || openItem === item.name
                           ? "bg-card text-primary"
                           : "hover:bg-hover hover:text-primary text-secondary"
@@ -172,7 +172,7 @@ const Sidebar = () => {
                           <NavLink
                             to={sub.link}
                             className={({ isActive }) =>
-                              `block px-3 py-1.5 rounded-md text-sm transition-colors duration-200 ${
+                              `block px-3 py-1.5 rounded-md text-sm transition-colors duration-300 ${
                                 isActive
                                   ? "bg-card text-primary"
                                   : "text-secondary hover:text-primary hover:bg-hover"

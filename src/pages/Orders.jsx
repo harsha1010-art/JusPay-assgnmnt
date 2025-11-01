@@ -1,5 +1,12 @@
 import React, { useState, useMemo } from 'react';
-import { Search, ChevronDown, Plus, ArrowUpDown, Calendar, ArrowRight ,ChevronLeft, ChevronRight} from 'lucide-react';
+import {
+  Search,
+  Plus,
+  ArrowUpDown,
+  ChevronLeft,
+  ChevronRight,
+  Filter,
+} from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import Navmenu from '../components/Navmenu';
 import NotificationSidebar from '../components/NotificationSidebar';
@@ -9,27 +16,29 @@ const Orders = () => {
   const [selectedOrders, setSelectedOrders] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
-  const [dateFilter, setDateFilter] = useState('All time');
   const [currentPage, setCurrentPage] = useState(1);
+  const [showFilter, setShowFilter] = useState(false); // 🔹 Toggle filter dropdown
+
   const itemsPerPage = 5;
 
   // Filter orders based on search term and filters
   const filteredOrders = useMemo(() => {
     return ordersData.orders.filter(order => {
-      const matchesSearch = 
+      const matchesSearch =
         order.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
         order.user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         order.project.toLowerCase().includes(searchTerm.toLowerCase()) ||
         order.address.toLowerCase().includes(searchTerm.toLowerCase());
 
-      const matchesStatus = statusFilter === 'All' || order.status === statusFilter;
+      const matchesStatus =
+        statusFilter === 'All' || order.status === statusFilter;
 
       return matchesSearch && matchesStatus;
     });
   }, [searchTerm, statusFilter]);
 
   // Handle checkbox selection
-  const handleSelectAll = (e) => {
+  const handleSelectAll = e => {
     if (e.target.checked) {
       setSelectedOrders(filteredOrders.map(order => order.id));
     } else {
@@ -37,21 +46,21 @@ const Orders = () => {
     }
   };
 
-  const handleSelectOrder = (orderId) => {
-    setSelectedOrders(prev => 
-      prev.includes(orderId) 
+  const handleSelectOrder = orderId => {
+    setSelectedOrders(prev =>
+      prev.includes(orderId)
         ? prev.filter(id => id !== orderId)
         : [...prev, orderId]
     );
   };
 
-  const getStatusColor = (status) => {
+  const getStatusColor = status => {
     const colors = {
-      'In Progress': 'text-[#8A8CD9]  ',
-      'Complete': 'text-[#4AA785]  ',
-      'Pending': 'text-[#59A8D4] ',
-      'Approved': 'text-[#FFC555]',
-      'Rejected': 'text-[#FFFFFF66] '
+      'In Progress': 'text-[#8A8CD9]',
+      Complete: 'text-[#4AA785]',
+      Pending: 'text-[#59A8D4]',
+      Approved: 'text-[#FFC555]',
+      Rejected: 'text-[#FF6B6B]',
     };
     return colors[status] || 'text-gray-600 bg-gray-50';
   };
@@ -76,40 +85,71 @@ const Orders = () => {
         {/* Page Content */}
         <div className="flex-1 p-6 overflow-y-auto">
           {/* Header */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold text-primary">Order List</h1>
-       
-      </div>
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-2xl font-semibold text-primary">Order List</h1>
+          </div>
 
-      {/* Filters */}
-      <div className="flex items-center gap-4 mb-6">
-        <div className="relative w-72">
-          <Search size={16} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary" />
-          <input
-            type="text"
-            placeholder="Search..."
-            className="w-full pl-10 pr-4 h-10 bg-card  rounded-md text-sm text-primary placeholder:text-secondary focus:outline-none focus:ring-1 focus:ring-primary"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
-        <div className="relative">
-          <button className="px-4 py-2 bg-card  rounded-lg text-primary flex items-center gap-2">
-            <Calendar size={16} />
-            {dateFilter}
-            <ChevronDown size={16} />
-          </button>
-        </div>
-        <div className="relative">
-          <button className="px-4 py-2 bg-card  rounded-lg text-primary flex items-center gap-2">
-            Status
-            <ChevronDown size={16} />
-          </button>
-        </div>
-      </div>
+          {/* Filters */}
+          <div className="flex items-center justify-between bg-card backdrop-blur-sm rounded-2xl px-4 py-3 relative">
+            <div className="flex items-center gap-3">
+              <button className="p-2 rounded-lg hover:bg-muted transition">
+                <Plus size={16} className="text-muted-foreground" />
+              </button>
+
+              {/* 🔹 Filter Icon with Dropdown */}
+              <div className="relative">
+                <button
+                  onClick={() => setShowFilter(!showFilter)}
+                  className="p-2 rounded-lg hover:bg-muted transition cursor-pointer"
+                >
+                  <Filter size={16} className="text-muted-foreground" />
+                </button>
+
+                {showFilter && (
+                  <div className="absolute top-10 left-0 bg-background  rounded-md shadow-lg w-40 z-20">
+                    {['All', 'In Progress', 'Complete', 'Pending', 'Approved', 'Rejected'].map(status => (
+                      <div
+                        key={status}
+                        onClick={() => {
+                          setStatusFilter(status);
+                          setShowFilter(false);
+                        }}
+                        className={`px-3 py-2 text-sm cursor-pointer hover:bg-muted transition ${
+                          statusFilter === status ? 'text-primary font-medium' : 'text-secondary'
+                        }`}
+                      >
+                        {status}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <button className="p-2 rounded-lg hover:bg-muted transition">
+                <ArrowUpDown size={16} className="text-muted-foreground" />
+              </button>
+            </div>
+
+            {/* Search Input */}
+            <div className="relative w-72">
+              <Search
+                size={16}
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
+              />
+              <input
+                type="text"
+                placeholder="Search"
+                className="w-full h-9 pl-9 pr-4 rounded-lg bg-background text-sm text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary focus:outline-none transition"
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
+              />
+            </div>
+          </div>
+
+         
 
       {/* Table */}
-      <div className="bg-card  rounded-lg overflow-hidden">
+      <div className="bg-background  rounded-lg overflow-hidden">
         <table className="w-full">
           <thead>
             <tr className="border-b border-default">
