@@ -59,35 +59,32 @@ function Dashboard() {
             msOverflowStyle: '-ms-autohiding-scrollbar'
           }}
         >
-          {/* Top row: Stats cards (2x2 grid) + Projections chart */}
-          <div className="grid grid-cols-3 gap-4">
-            <div className="col-span-2">
-              <div className="grid grid-cols-2 gap-4">
-                {stats.map((stat, index) => (
-                  <StatsCard
-                    key={index}
-                    title={stat.title}
-                    value={stat.value}
-                    change={stat.change}
-                    isPositive={stat.isPositive}
-                  />
-                ))}
-              </div>
+          <div className="grid gap-7 mb-7" style={{ gridTemplateColumns: '2.5fr 3fr' }}>
+            <div className="grid grid-cols-2 gap-7 content-start">
+              {stats.map((stat, index) => (
+                <StatsCard
+                  key={index}
+                  title={stat.title}
+                  value={stat.value}
+                  change={stat.change}
+                  isPositive={stat.isPositive}
+                />
+              ))}
             </div>
 
-            <div className="col-span-1">
+            <div>
               <ProjectionsChart />
             </div>
           </div>
 
           {/* Middle row: Revenue trend (wide) + World map */}
-          <div className="grid grid-cols-3 gap-4">
-            <div className="col-span-2">
-              <div className="bg-card rounded-xl overflow-hidden">
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-7 mb-7">
+            <div className="xl:col-span-2">
+              <div className="bg-card rounded-xl overflow-hidden h-full">
                 <div className="p-4 border-b border-default">
                   <div className="flex justify-between items-center">
                     <h2 className="text-lg font-semibold text-primary">Revenue</h2>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-7">
                       <div className="flex items-center gap-2">
                         <span aria-hidden="true" className="w-3 h-3 rounded-full" style={{ backgroundColor: 'var(--chart-bar-1)' }}></span>
                         <span className="text-sm text-secondary">Current Week <span className="text-primary font-medium ml-1">$58,211</span></span>
@@ -105,17 +102,17 @@ function Dashboard() {
               </div>
             </div>
 
-            <div className="col-span-1">
+            <div className="xl:col-span-1">
               <WorldMap />
             </div>
           </div>
 
           {/* Bottom row: Top Products + Total Sales donut */}
-          <div className="grid grid-cols-3 gap-4">
-            <div className="col-span-2 w-[100%] h-full">
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-7">
+            <div className="xl:col-span-2 w-full h-full">
               <TopProducts />
             </div>
-            <div className="col-span-1 h-full">
+            <div className="xl:col-span-1 h-full">
               <TotalSalesDonut />
             </div>
           </div>

@@ -11,7 +11,7 @@ const TopProducts = () => {
 
   return (
     // Top products card (accessible region)
-    <div className="bg-card rounded-xl " role="region" aria-labelledby="top-products-heading">
+    <div className="bg-card h-full rounded-xl " role="region" aria-labelledby="top-products-heading">
       <div className="px-6 py-4 border-b border-default">
         <h3 id="top-products-heading" className="text-lg font-semibold text-primary">Top Selling Products</h3>
       </div>
