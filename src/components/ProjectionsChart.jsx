@@ -86,9 +86,9 @@ const ProjectionsChart = () => {
       tooltip: {
         mode: 'index',
         intersect: false,
-        backgroundColor: colors.primary || '#1f2937',
-        titleColor: '#000000ff',
-        bodyColor: '#000000ff',
+        backgroundColor:  '#1f2937',
+        titleColor: '#ffffffff',
+        bodyColor: '#ffffffff',
         borderColor: colors.border || '#e5e7eb',
         borderWidth: 1,
         padding: 12,

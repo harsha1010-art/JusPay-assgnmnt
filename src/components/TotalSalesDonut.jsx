@@ -8,15 +8,36 @@ const TotalSalesDonut = () => {
   const [colors, setColors] = useState({})
 
   useEffect(() => {
-    const root = getComputedStyle(document.documentElement)
-    setColors({
-      card: root.getPropertyValue('--card').trim(),
-      donut1: root.getPropertyValue('--donut-1').trim() || '#111827',
-      donut2: root.getPropertyValue('--donut-2').trim() || '#BAEDBD',
-      donut3: root.getPropertyValue('--donut-3').trim() || '#95A4FC',
-      donut4: root.getPropertyValue('--donut-4').trim() || '#B1E3FF',
-      cardForeground: root.getPropertyValue('--card-foreground').trim() ,
+    const updateColors = () => {
+      const root = getComputedStyle(document.documentElement)
+      setColors({
+        card: root.getPropertyValue('--card').trim(),
+        background: root.getPropertyValue('--background').trim(),
+        donut1: root.getPropertyValue('--donut-1').trim() || '#111827',
+        donut2: root.getPropertyValue('--donut-2').trim() || '#BAEDBD',
+        donut3: root.getPropertyValue('--donut-3').trim() || '#95A4FC',
+        donut4: root.getPropertyValue('--donut-4').trim() || '#B1E3FF',
+        cardForeground: root.getPropertyValue('--card-foreground').trim(),
+      })
+    }
+
+    updateColors()
+
+    // Listen for theme changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          updateColors()
+        }
+      })
     })
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    })
+
+    return () => observer.disconnect()
   }, [])
 
   const labels = ['Direct', 'Affiliate', 'Sponsored', 'E-mail']
@@ -37,6 +58,7 @@ const TotalSalesDonut = () => {
         data: values,
         backgroundColor: segmentColors,
         borderWidth: 4,
+        borderColor: colors.card || '#F7F9FB',
         borderRadius: 6,
         spacing: 2,
       },
