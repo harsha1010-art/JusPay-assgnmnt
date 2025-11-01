@@ -76,6 +76,20 @@ const ProjectionsChart = () => {
   const options = useMemo(() => ({
     responsive: true,
     maintainAspectRatio: false,
+    // Lightweight entry animation for bars
+    animation: {
+      duration: 800,
+      easing: 'easeOutCubic',
+      animateRotate: false,
+      animateScale: true,
+    },
+    // fine-grained animations per property
+    animations: {
+      y: {
+        duration: 900,
+        easing: 'easeOutQuart',
+      },
+    },
     plugins: {
       legend: {
         display: false,

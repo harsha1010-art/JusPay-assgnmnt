@@ -68,6 +68,13 @@ const TotalSalesDonut = () => {
   const options = {
     responsive: true,
     cutout: '70%',
+    // Animate doughnut rotation/scale on mount
+    animation: {
+      animateRotate: true,
+      animateScale: true,
+      duration: 900,
+      easing: 'easeOutCubic',
+    },
     plugins: {
       legend: { display: false },
       tooltip: {

@@ -18,19 +18,28 @@ import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const [openItem, setOpenItem] = useState("Default");
+  const [favTab, setFavTab] = useState("Favorites"); // "Favorites" or "Recently"
   const { collapsed, toggleSidebar } = useSidebar();
 
   const toggleItem = (name) => {
     setOpenItem(openItem === name ? null : name);
   };
 
+  // Tab logic for Favorites/Recently
+  const favoritesItems = favTab === "Favorites"
+    ? [
+        { name: "Overview", icon: <Home size={16} />, link: "/overview" },
+        { name: "Projects", icon: <Folder size={16} />, link: "/projects" },
+      ]
+    : [
+        { name: "Projects", icon: <Folder size={16} />, link: "/projects" },
+        { name: "Overview", icon: <Home size={16} />, link: "/overview" },
+      ];
+
   const menuData = [
     {
       title: "Favorites",
-      items: [
-        { name: "Overview", icon: <Home size={16} />, link: "/overview" },
-        { name: "Projects", icon: <Folder size={16} />, link: "/projects" },
-      ],
+      items: favoritesItems,
     },
     {
       title: "Dashboard",
@@ -104,30 +113,75 @@ const Sidebar = () => {
 
   {/* Navigation landmark for screen readers */}
   <nav role="navigation" aria-label="Main sidebar" className="flex-1 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
-        {menuData.map((section, index) => (
+        {/* Favorites/Recently tab UI */}
+        <div className="mb-6">
+          {!collapsed && (
+            <div className="flex gap-4 mb-2">
+              <button
+                className={`text-xs uppercase select-none font-semibold transition px-1 py-0.5 rounded ${favTab === "Favorites" ? "text-primary" : "text-secondary hover:text-primary"}`}
+                onClick={() => setFavTab("Favorites")}
+                aria-pressed={favTab === "Favorites"}
+              >
+                Favorites
+              </button>
+              <button
+                className={`text-xs uppercase select-none font-semibold transition px-1 py-0.5 rounded ${favTab === "Recently" ? "text-primary" : "text-secondary hover:text-primary"}`}
+                onClick={() => setFavTab("Recently")}
+                aria-pressed={favTab === "Recently"}
+              >
+                Recently
+              </button>
+            </div>
+          )}
+          <ul className="space-y-1">
+            {favoritesItems.map((item, idx) => (
+              <li key={idx}>
+                <NavLink
+                  to={item.link}
+                  onClick={(e) => {
+                    if (collapsed) {
+                      e.preventDefault();
+                      toggleSidebar();
+                      return;
+                    }
+                  }}
+                  className={({ isActive }) =>
+                    `flex gap-2 items-center px-3 py-2 rounded-md text-sm font-medium cursor-pointer transition-all duration-300 ${
+                      isActive ? "bg-card text-primary" : "hover:bg-hover hover:text-primary text-secondary"
+                    }`
+                  }
+                >
+                  {!collapsed && <Dot size={14} />}
+                  <div className="flex items-center gap-3">
+                    <span aria-hidden="true">{item.icon}</span>
+                    {!collapsed && <span>{item.name}</span>}
+                  </div>
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Render the rest of the menuData (Dashboard, Pages) */}
+        {menuData.slice(1).map((section, index) => (
           <div key={index} className="mb-6">
             {!collapsed && (
               <h3 className="text-secondary text-xs uppercase mb-2 select-none">
                 {section.title}
               </h3>
             )}
-
             <ul className="space-y-1">
               {section.items.map((item, idx) => (
                 <li key={idx}>
-                  {/* 🔗 Wrap main items in NavLink */}
                   <NavLink
                     to={item.link}
                     onClick={(e) => {
-                      // When collapsed, expand sidebar instead of just navigating
                       if (collapsed) {
                         e.preventDefault();
                         toggleSidebar();
                         if (item.subItems) setOpenItem(item.name);
                         return;
                       }
-
-                      // Toggle submenu if present
                       if (item.subItems) {
                         e.preventDefault();
                         toggleItem(item.name);
@@ -152,15 +206,11 @@ const Sidebar = () => {
                       ) : (
                         <Dot size={14} />
                       ))}
-
                     <div className="flex items-center gap-3">
-                      {/* Icon is decorative for screen readers */}
                       <span aria-hidden="true">{item.icon}</span>
                       {!collapsed && <span>{item.name}</span>}
                     </div>
                   </NavLink>
-
-                  {/* Submenu */}
                   {item.subItems && (
                     <ul
                       className={`pl-8 space-y-1 overflow-hidden transition-all duration-300 ${

@@ -1,5 +1,5 @@
 import React from "react";
-import { Search, Sun, Moon, Bell, Settings, Star, PanelLeft } from "lucide-react";
+import { Search, Sun, Moon, Bell, Settings, Star, PanelLeft, PanelRight, HistoryIcon } from "lucide-react";
 import { useSidebar } from "../context/SidebarContext";
 import { useTheme } from "../context/ThemeContext";
 import { useNotifications } from "../context/NotificationContext";
@@ -50,15 +50,18 @@ const Navmenu = () => {
             <Sun size={18} aria-hidden="true" className="text-secondary hover:text-primary" />
           )}
         </button>
-
+<button>
+          <HistoryIcon size={18} aria-hidden="true" className="text-secondary hover:text-primary" />
+        </button>
         {/* Notifications (opens the notification sidebar) */}
         <button aria-label="Open notifications" onClick={toggleNotifications} className="p-1 rounded">
           <Bell size={18} aria-hidden="true" className="text-secondary hover:text-primary" />
         </button>
+        
 
         {/* Settings */}
-        <button aria-label="Settings" className="p-1 rounded">
-          <Settings size={18} aria-hidden="true" className="text-secondary hover:text-primary" />
+        <button aria-label="Settings" className="p-1 rounded"onClick={toggleNotifications} >
+          <PanelRight size={18} aria-hidden="true" className="text-secondary hover:text-primary" />
         </button>
       </div>
     </div>
