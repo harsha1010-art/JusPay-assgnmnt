@@ -60,7 +60,7 @@ function Dashboard() {
           }}
         >
           <div className="grid gap-7 mb-7" style={{ gridTemplateColumns: '2.5fr 3fr' }}>
-            <div className="grid grid-cols-2 gap-7 content-start">
+            <div className="grid grid-cols-2 gap-7 content-start min-w-0">
               {stats.map((stat, index) => (
                 <StatsCard
                   key={index}
@@ -72,19 +72,18 @@ function Dashboard() {
               ))}
             </div>
 
-            <div>
+            <div className="min-w-0">
               <ProjectionsChart />
             </div>
           </div>
 
-          {/* Middle row: Revenue trend (wide) + World map */}
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-7 mb-7">
             <div className="xl:col-span-2">
               <div className="bg-card rounded-xl overflow-hidden h-full">
                 <div className="p-4 border-b border-default">
                   <div className="flex justify-between items-center">
                     <h2 className="text-lg font-semibold text-primary">Revenue</h2>
-                    <div className="flex items-center gap-7">
+                    <div className="flex items-center gap-4">
                       <div className="flex items-center gap-2">
                         <span aria-hidden="true" className="w-3 h-3 rounded-full" style={{ backgroundColor: 'var(--chart-bar-1)' }}></span>
                         <span className="text-sm text-secondary">Current Week <span className="text-primary font-medium ml-1">$58,211</span></span>
