@@ -1,4 +1,4 @@
-# Modern React Dashboard with Advanced Features
+# Juspay Assignment
 
 A modern, responsive admin dashboard built with React and Vite, featuring dark mode, real-time data visualization, and accessibility features.
 
